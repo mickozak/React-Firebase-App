@@ -1,18 +1,18 @@
 import React from 'react'
-import {database} from "../firebase";
-import {mapObjectToArray} from '../utils'
+import {auth, database} from "../../firebase";
+import {mapObjectToArray} from '../../utils'
+import ChatAppBar from './ChatAppBar'
+import Message from '../chat/Message'
 
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import MenuItem from 'material-ui/MenuItem'
-import moment from 'moment'
-import AppBar from 'material-ui/AppBar'
-import IconButton from 'material-ui/IconButton'
-import NavigationClose from 'material-ui/svg-icons/navigation/close'
+
+
+
 
 class Chat extends React.Component {
     state = {
-        name: 'Michał',
         newMessage: '',
         message: null
     }
@@ -29,17 +29,16 @@ class Chat extends React.Component {
 
     addMessage = () => database.ref('/chat').push({
         message: this.state.newMessage,
-        user: this.state.name,
+        user: auth.currentUser.displayName,
+        email: auth.currentUser.email,
+        avatar: auth.currentUser.photoURL,
         timestamp: Date.now(),
     }).then(() => this.setState({newMessage: ''}))
 
     render() {
         return (
             <div>
-                <AppBar
-                    showMenuIconButton={false}
-                    iconElementRight={<IconButton><NavigationClose/></IconButton>}
-                />
+                <ChatAppBar/>
                 <TextField
                     fullWidth={true}
                     rows={3}
@@ -59,11 +58,10 @@ class Chat extends React.Component {
                             <MenuItem>Ładowanie...</MenuItem>
                             :
                             this.state.messages.map(message => (
-                                <MenuItem key={message.key}>
-                                    <span>({moment(message.timestamp).format('DD-MM-YY HH:mm')})</span>
-                                    <b>{message.user}:</b>
-                                    <span>{message.message}</span>
-                                </MenuItem>
+                                <Message
+                                    message={message}
+                                />
+
                             ))
                     }
 

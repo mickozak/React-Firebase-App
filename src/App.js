@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Counter from './components/Counter'
-import Chat from './components/Chat'
+import Chat from './components/chat/Chat'
 import Auth from './components/auth'
 
 
