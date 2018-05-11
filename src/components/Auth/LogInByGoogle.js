@@ -1,15 +1,17 @@
+
 import React from 'react'
 
 import RaisedButton from 'material-ui/RaisedButton'
+import PaperRefined from '../PaperRefined'
 
-const LoginByGoogle = (props) => (
-    <div>
+const LogInByGoogle = (props) => (
+    <PaperRefined centered={true}>
         <RaisedButton
             secondary={true}
             label={'Log In By Google'}
             onClick={props.onLogInClick}
         />
-    </div>
+    </PaperRefined>
 )
 
-export default LoginByGoogle
+export default LogInByGoogle

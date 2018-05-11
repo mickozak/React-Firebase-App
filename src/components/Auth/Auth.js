@@ -1,39 +1,37 @@
 import React from 'react'
 
-import {auth} from '../../firebase'
-import LoginForms from './LoginForms'
+import { auth } from '../../firebase'
 
+import LogInForms from './LogInForms'
 
-
-class Auth extends React.Component{
-    state={
+class Auth extends React.Component {
+    state = {
         isLoggedIn: false
     }
 
-    componentDidMount(){
+    componentDidMount() {
         auth.onAuthStateChanged(
-            user=>{
-                if(user){
-                    this.setState({isLoggedIn: true})
+            user => {
+                if (user) {
+                    this.setState({ isLoggedIn: true })
                 } else {
-                    this.setState({isLoggedIn: false})
+                    this.setState({ isLoggedIn: false })
                 }
             }
         )
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 {
                     this.state.isLoggedIn ?
                         this.props.children
                         :
-                        <LoginForms/>
+                        <LogInForms />
                 }
             </div>
         )
     }
 }
-
 export default Auth

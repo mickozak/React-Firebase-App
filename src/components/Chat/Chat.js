@@ -1,20 +1,17 @@
 import React from 'react'
-import {auth, database} from "../../firebase";
-import {mapObjectToArray} from '../../utils'
-import ChatAppBar from './ChatAppBar'
-import Message from '../chat/Message'
+
+import { auth, database } from '../../firebase'
+import { mapObjectToArray } from '../../utils'
 
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-import MenuItem from 'material-ui/MenuItem'
-
-
-
+import ChatAppBar from './ChatAppBar'
+import Message from './Message'
 
 class Chat extends React.Component {
     state = {
         newMessage: '',
-        message: null
+        messages: null
     }
 
     componentDidMount() {
@@ -25,50 +22,51 @@ class Chat extends React.Component {
         ))
     }
 
-    onNewMessageChangeHandler = (e, value) => this.setState({newMessage: value})
+    onNewMessageChangeHandler = (e, value) => this.setState({ newMessage: value })
 
-    addMessage = () => database.ref('/chat').push({
-        message: this.state.newMessage,
-        user: auth.currentUser.displayName,
-        email: auth.currentUser.email,
-        avatar: auth.currentUser.photoURL,
-        timestamp: Date.now(),
-    }).then(() => this.setState({newMessage: ''}))
+    addMessage = () => {
+        const newRefForMessage = database.ref('/chat').push({
+            message: this.state.newMessage,
+            user: auth.currentUser.displayName,
+            email: auth.currentUser.email,
+            avatar: auth.currentUser.photoURL,
+            timestamp: Date.now(),
+        }).then(() => this.setState({ newMessage: '' }))
+    }
 
     render() {
         return (
             <div>
-                <ChatAppBar/>
+                <ChatAppBar />
+
                 <TextField
-                    fullWidth={true}
-                    rows={3}
+                    name={'message'}
                     onChange={this.onNewMessageChangeHandler}
                     value={this.state.newMessage}
+                    fullWidth={true}
                 />
-
                 <RaisedButton
                     onClick={this.addMessage}
-                    label={'Send'}
+                    label={'Send!'}
                     primary={true}
                     fullWidth={true}
                 />
+
                 <div>
                     {
                         !this.state.messages ?
-                            <MenuItem>Ładowanie...</MenuItem>
+                            'Ładowanie...'
                             :
                             this.state.messages.map(message => (
                                 <Message
+                                    key={message.key}
                                     message={message}
                                 />
-
                             ))
                     }
-
                 </div>
             </div>
         )
     }
 }
-
 export default Chat

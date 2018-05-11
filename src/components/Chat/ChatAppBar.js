@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {auth} from "../../firebase";
+import { auth } from '../../firebase'
 
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
@@ -10,9 +10,10 @@ const ChatAppBar = (props) => (
     <AppBar
         showMenuIconButton={false}
         iconElementRight={
-            <IconButton onClick={()=>auth.signOut()}>
-                <NavigationClose/>
-            </IconButton>}
+            <IconButton onClick={() => auth.signOut()}>
+                <NavigationClose />
+            </IconButton>
+        }
     />
 )
 
