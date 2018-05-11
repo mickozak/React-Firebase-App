@@ -6,10 +6,13 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import MenuItem from 'material-ui/MenuItem'
 import moment from 'moment'
+import AppBar from 'material-ui/AppBar'
+import IconButton from 'material-ui/IconButton'
+import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
 class Chat extends React.Component {
     state = {
-        name: 'Michal',
+        name: 'Michał',
         newMessage: '',
         message: null
     }
@@ -33,6 +36,10 @@ class Chat extends React.Component {
     render() {
         return (
             <div>
+                <AppBar
+                    showMenuIconButton={false}
+                    iconElementRight={<IconButton><NavigationClose/></IconButton>}
+                />
                 <TextField
                     fullWidth={true}
                     rows={3}

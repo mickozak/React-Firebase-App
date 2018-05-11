@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Counter from './components/Counter'
 import Chat from './components/Chat'
+import Auth from './components/auth'
 
 
 class App extends Component {
@@ -10,9 +11,9 @@ class App extends Component {
 
         return (
             <div>
-                <Counter/>
-                <hr/>
-                <Chat/>
+                <Auth>
+                    <Chat/>
+                </Auth>
             </div>
         );
     }
