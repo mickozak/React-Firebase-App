@@ -50,9 +50,6 @@ class LogInForms extends React.Component {
                     onPasswordChange={this.onLogInPasswodChange}
                     onLogInClick={this.logInByEmailAndPassword}
                 />
-                <LogInByGoogle
-                    onLogInClick={this.logInByGoogle}
-                />
                 <CreateUserByEmailAndPassword
                     emailValue={this.state.createUserEmail}
                     onEmailChange={this.onCreateUserEmailChange}
@@ -61,6 +58,9 @@ class LogInForms extends React.Component {
                     retypePasswordValue={this.state.createUserRetypePassword}
                     onRetypePasswordChange={this.onCreateUserRetypePasswodChange}
                     onRegisterClick={this.createUserByEmailAndPassword}
+                />
+                <LogInByGoogle
+                    onLogInClick={this.logInByGoogle}
                 />
             </div>
         )

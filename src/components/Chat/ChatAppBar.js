@@ -9,6 +9,7 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close'
 const ChatAppBar = (props) => (
     <AppBar
         showMenuIconButton={false}
+        title="React Chat"
         iconElementRight={
             <IconButton onClick={() => auth.signOut()}>
                 <NavigationClose />

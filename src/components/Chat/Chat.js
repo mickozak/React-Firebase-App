@@ -5,7 +5,6 @@ import { mapObjectToArray } from '../../utils'
 
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-import ChatAppBar from './ChatAppBar'
 import Message from './Message'
 
 class Chat extends React.Component {
@@ -37,8 +36,6 @@ class Chat extends React.Component {
     render() {
         return (
             <div>
-                <ChatAppBar />
-
                 <TextField
                     name={'message'}
                     onChange={this.onNewMessageChangeHandler}
@@ -51,7 +48,6 @@ class Chat extends React.Component {
                     primary={true}
                     fullWidth={true}
                 />
-
                 <div>
                     {
                         !this.state.messages ?
